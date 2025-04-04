@@ -3,22 +3,19 @@ import 'package:commerce_app_project/utilits/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class LoginSceen extends StatelessWidget {
 
-  static const String routeName = "loginScreen";
 
-  @override
-  State<loginScreen> createState() => _RegisterState();
-}
-
-class _RegisterState extends State<loginScreen> {
+  static const String routeName = "LoginScreen";
 
   var emailController = TextEditingController();
 
   var passwordController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
+
+  LoginSceen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +25,26 @@ class _RegisterState extends State<loginScreen> {
           decoration: BoxDecoration(color: AppColors.primaryColor),
           child: SingleChildScrollView(
             child: Column(
+
               children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 50,bottom: 25),
+                  child: Image(image: AssetImage("assets/images/logo.png"),height: 120,),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right:200,bottom: 5),
+                  child: Text("Welcome Back",style: TextStyle(fontSize: 20,color: AppColors.greenColor,fontWeight:FontWeight.bold ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right:150,bottom: 25),
+                  child: Text("please sign in with your Email",style: TextStyle(fontSize: 13,color: AppColors.greenColor, ),),
+                ),
                 Form(
                     key: formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Text("Full Name",
-                                  style:
-                                      TextStyle(color: AppColors.whiteColor))),
-                        ),
+
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Container(
@@ -93,20 +93,11 @@ class _RegisterState extends State<loginScreen> {
                             return null;
                           },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Confirmation Password",
-                                style: TextStyle(color: AppColors.whiteColor),
-                              )),
-                        ),
                         const SizedBox(
                           height: 35,
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 8),
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.greenColor),
@@ -119,8 +110,9 @@ class _RegisterState extends State<loginScreen> {
                                     color: AppColors.whiteColor, fontSize: 16),
                               )),
                         ),
-                        const SizedBox(
-                          height: 35,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60,bottom: 40),
+                          child: Text("Don’t have an account? Create Account",style: TextStyle(fontSize: 13,color: AppColors.greenColor, ),),
                         ),
                       ],
                     )),
@@ -133,10 +125,6 @@ class _RegisterState extends State<loginScreen> {
   void login() async{
     if (formKey.currentState?.validate() == true) {
       try {
-        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailController.text,
-            password: passwordController.text,
-        );
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');

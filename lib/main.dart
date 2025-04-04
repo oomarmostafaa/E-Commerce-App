@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:Register.routeName ,
+      initialRoute:LoginSceen.routeName ,
       routes: {
-        loginScreen.routeName:(context)=>loginScreen(),
-        Register.routeName:(context)=>Register(),
+        LoginSceen.routeName:(context)=>LoginSceen(),
+        Register.routeName:(context)=> const Register(),
       },
     );
   }
